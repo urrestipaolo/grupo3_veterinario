@@ -1,0 +1,125 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------- ENUMERACIONES -------------
+
+enum Role { 
+RECEPCIONISTA
+VETERINARIO
+LABORATORISTA
+}
+
+enum Especie {
+PERRO
+GATO
+}
+
+enum EstadoAtencion {
+  EN_CONSULTA
+  EN_ESPERA_EXAMENES
+  DADA_DE_ALTA
+}
+
+enum TipoExamen {
+  HEMOGRAMA
+  RAYOS_X
+  ECOGRAFICA
+}
+
+enum EstadoExamen {
+  PENDIENTE
+  CANCELADO
+  COMPLETADO
+}
+
+
+
+// ------------ MODELOS DE LA VETERINARIA
+
+model Usuario {
+  id           Int      @id @default(autoincrement())
+  nombre       String
+  email        String   @unique
+  passwordd    String   @map("password_hash")
+  rol          Role
+  createdAt    DateTime @default(now()) @map("created_at")
+  atencioneComoVeterinario AtencionMedica[] @relation("veterinarioAtencion")
+  atencionesAbierta AtencionMedica[] @relation("abiertaRecepcion")
+  examenesSolicitados ExamenLaboratorio[] @relation("solicitudExamen")
+  examenesLaboratorio ExamenLaboratorio[] @relation("laboratorioExamen")
+
+  @@map("usuarios")
+}
+
+model Dueño {
+  id        Int       @id @default(autoincrement())
+  nombre    String
+  telefono  String
+  email     String?
+  direccion String?
+  mascotas  Mascota[]
+
+  @@map("dueños")
+}
+
+model Mascota {
+  id        Int       @id @default(autoincrement())
+  nombre          String
+  especie         Especie
+  raza            String?
+  peso            Decimal  @db.Decimal(5, 2)
+  edadAproximada  Int      @map("edad_aproximada")
+  dueñoId         Int      @map("dueño_id")
+  dueño           Dueño    @relation(fields: [dueñoId], references: [id])
+  atenciones    AtencionMedica[]
+
+  @@map("mascotas")
+}
+
+model AtencionMedica {
+  id                    Int            @id @default(autoincrement())
+  mascotaId             Int            @map("mascota_id")
+  mascota               Mascota        @relation(fields: [mascotaId], references: [id])
+  veterinarioId         Int            @map("veterinario_id")
+  veterinario           Usuario        @relation("veterinarioAtencion", fields: [veterinarioId], references: [id])
+  abiertaPorId          Int            @map("abierta_por_id")
+  abiertaPor            Usuario        @relation("abiertaRecepcion", fields: [abiertaPorId], references: [id])
+  motivoConsulta        String         @map("motivo_consulta")
+  diagnosticoPreliminar String?        @map("diagnostico_preliminar")
+  tratamiento           String?
+  estado                EstadoAtencion @default(EN_CONSULTA)
+  fechaIngreso          DateTime       @default(now()) @map("fecha_ingreso")
+  fechaAlta             DateTime?      @map("fecha_alta")
+
+  examen              ExamenLaboratorio[]
+
+  @@map("antenciones_medicas")
+}
+
+model ExamenLaboratorio {
+  id               Int            @id @default(autoincrement())
+  atencionId       Int            @map("atencion_id")
+  atencion         AtencionMedica @relation(fields: [atencionId], references: [id])
+  tipoExamen       TipoExamen     @map("tipo_examen")
+  solicitadoPorId  Int            @map("solicitado_por_id")
+  solicitadoPor    Usuario        @relation("solicitudExamen", fields: [solicitadoPorId], references: [id])
+  LaboratoristaId  Int            @map("laboratorista_id")
+  laboratorista    Usuario        @relation("laboratorioExamen", fields: [LaboratoristaId], references: [id])
+  resultados       String?
+  observaciones    String?
+  estado           EstadoExamen   @default(PENDIENTE)
+  fechaResultado   DateTime @default(now()) @map("fecha_Resultado") 
+  
+  @@map ("examenes_laboratorio")
+}
