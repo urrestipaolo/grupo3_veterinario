@@ -121,5 +121,5 @@ model ExamenLaboratorio {
   estado           EstadoExamen   @default(PENDIENTE)
   fechaResultado   DateTime @default(now()) @map("fecha_Resultado") 
   
-  @@map ("examenes_laboratorio")
+  @@map("examenes_laboratorio")
 }
