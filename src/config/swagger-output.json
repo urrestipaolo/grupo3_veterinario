@@ -435,7 +435,8 @@
         "tags": [
           "Dueños"
         ],
-        "description": "Registra un nuevo dueño (solo recepción)",
+        "summary": "Crea un nuevo dueño en el sistema",
+        "description": "Ingrese los datos del dueño en el cuerpo de la solicitud",
         "parameters": [
           {
             "name": "authorization",
@@ -459,6 +460,11 @@
             "description": "Forbidden"
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "content": {
             "application/json": {
@@ -489,7 +495,8 @@
         "tags": [
           "Dueños"
         ],
-        "description": "Devuelve un dueño con sus mascotas",
+        "summary": "Obtiene los detalles de un dueño específico por su ID, incluyendo sus mascotas",
+        "description": "Coloque el ID del dueño",
         "parameters": [
           {
             "name": "id",
@@ -523,7 +530,12 @@
           "404": {
             "description": "Not Found"
           }
-        }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
       }
     }
   },
