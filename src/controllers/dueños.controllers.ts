@@ -1,8 +1,10 @@
 import type { Request, Response } from "express";
 import { crearDueño, obtenerDueñoPorId } from "../models/dueños.model";
 
-// POST /duenos — recepción registra al dueño.
+// POST /dueños — recepción registra al dueño.
 export async function crearDueñoController(req: Request, res: Response) {
+  // #swagger.tags = ['Dueños']
+  // #swagger.description = 'Registra un nuevo dueño (solo recepción)'
   const { nombre, telefono, email, direccion } = req.body;
 
   if (!nombre || !telefono) {
@@ -13,8 +15,10 @@ export async function crearDueñoController(req: Request, res: Response) {
   return res.status(201).json(dueño);
 }
 
-// GET /duenos/:id — devuelve el dueño con sus mascotas.
+// GET /dueños/:id — devuelve el dueño con sus mascotas.
 export async function obtenerDueñoController(req: Request, res: Response) {
+  // #swagger.tags = ['Dueños']
+  // #swagger.description = 'Devuelve un dueño con sus mascotas'
   const id = Number(req.params.id);
 
   if (Number.isNaN(id)) {
