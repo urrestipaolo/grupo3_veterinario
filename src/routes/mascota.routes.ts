@@ -5,7 +5,7 @@ import { authorize } from "../middlewares/authorize.middleware";
 
 const router = Router();
 
-router.get("/", verifyToken, authorize ("RECEPCIONISTA"), getMascota);
-router.post("/", verifyToken, authorize ("RECEPCIONISTA"), postMascota);
+router.get("/", verifyToken, authorize ("RECEPCIONISTA", "VETERINARIO"), getMascota);
+router.post("/", verifyToken, authorize ("RECEPCIONISTA", "VETERINARIO"), postMascota);
 
 export default router;

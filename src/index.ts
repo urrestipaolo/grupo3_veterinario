@@ -3,6 +3,7 @@ import cors from "cors";
 import atencionMedicaRouter from "./routes/atencion-medica.routes.js";
 import UsuarioRouter from "./routes/usuario.route";
 import MascotaRouter from "./routes/mascota.routes"
+import DueñosRouter from "./routes/dueños.routes";
 import authRouter from "./routes/auth.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger-output.json" with { type: "json" };
@@ -22,6 +23,7 @@ app.use("/auth", authRouter);
 app.use("/usuarios", UsuarioRouter);
 app.use("/mascotas", MascotaRouter);
 app.use("/api/atenciones-medicas", atencionMedicaRouter);
+app.use("/dueños", DueñosRouter);
 
 app.listen(3000, () => {
   console.log(`servidor corriendo en http://localhost:3000`);

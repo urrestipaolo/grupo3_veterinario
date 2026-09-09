@@ -16,7 +16,7 @@ export const getUsuarios = async (req: Request, res: Response) => {
   }
 };
 
-export const postUsuario = async (req: Request, res: Response) => {
+/* export const postUsuario = async (req: Request, res: Response) => {
   try {
     const { nombre, email, password, rol } = req.body;
     if (!nombre || !email || !password || !rol) {
@@ -29,4 +29,4 @@ export const postUsuario = async (req: Request, res: Response) => {
   } catch (error) {
     return res.status(500).json({ message: error });
   }
-};
+}; */
