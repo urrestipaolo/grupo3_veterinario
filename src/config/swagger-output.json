@@ -11,13 +11,86 @@
     }
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Registrar un usuario nuevo",
+        "description": "registra a un usuario nuevo en el sistema",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/registerDTO"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/registerDTO"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Inicio de Sesion",
+        "description": "Autentica a un usuario y retorna su JWT",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/loginDTO"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/loginDTO"
+              }
+            }
+          }
+        }
+      }
+    },
     "/usuarios/": {
       "get": {
-        "tags": [
-          "Usuarios"
-        ],
-        "summary": "ver a todos los usuarios",
-        "description": "Permite visualizar el listado de todos los usuarios",
+        "description": "",
         "parameters": [
           {
             "name": "authorization",
@@ -37,12 +110,7 @@
           "403": {
             "description": "Forbidden"
           }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ]
+        }
       },
       "post": {
         "description": "",
@@ -81,6 +149,314 @@
           }
         }
       }
+    },
+    "/mascotas/": {
+      "get": {
+        "tags": [
+          "Mascotas"
+        ],
+        "summary": "Poder ver a todas las mascotas",
+        "description": "Una lista con las mascotas de la Veterinaria",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Mascotas"
+        ],
+        "summary": "Poder crear una mascota",
+        "description": "Cree una mascota según el ejemplo",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "example": "any"
+                  },
+                  "especie": {
+                    "example": "any"
+                  },
+                  "raza": {
+                    "example": "any"
+                  },
+                  "peso": {
+                    "example": "any"
+                  },
+                  "edadAproximada": {
+                    "example": "any"
+                  },
+                  "dueñoId": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/atenciones-medicas/": {
+      "get": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "Permite ver toda la lista de Atención Medica",
+        "description": "Ver toda la lista de Atención Medica",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "Crear una Nueva Atención Medica",
+        "description": "Siga el ejemplo para crear una nueva Atención Medica",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/atenciones-medicas/{id}": {
+      "get": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "Buscar una Atención Medica por el ID",
+        "description": "Ingrese la ID para encontrar la atención medica",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "Actualizar una Atención Medica por el ID",
+        "description": "Puede cambiar cualquier dato de la Atención Medica",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "ELIMINAR una Atención Medica por el ID",
+        "description": "Ingrese la ID de la Atención Medica a eliminar",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/atenciones-medicas/{id}/estado": {
+      "patch": {
+        "tags": [
+          "Atención Medica"
+        ],
+        "summary": "Cambiar el estado de la Atención Medica",
+        "description": "Ingrese el cambio para la Atención Medica",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "estado": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -99,14 +475,20 @@
           "RECEPCIONISTA",
           "VETERINARIO",
           "LABORATORISTA"
-        ]
+        ],
+        "xml": {
+          "name": "Rol"
+        }
       },
       "Especie": {
         "type": "string",
         "enum": [
           "PERRO",
           "GATO"
-        ]
+        ],
+        "xml": {
+          "name": "Especie"
+        }
       },
       "EstadoAtencion": {
         "type": "string",
@@ -114,7 +496,10 @@
           "EN_CONSULTA",
           "EN_ESPERA_EXAMENES",
           "DADA_DE_ALTA"
-        ]
+        ],
+        "xml": {
+          "name": "EstadoAtencion"
+        }
       },
       "TipoExamen": {
         "type": "string",
@@ -122,7 +507,10 @@
           "HEMOGRAMA",
           "RAYOS_X",
           "ECOGRAFICA"
-        ]
+        ],
+        "xml": {
+          "name": "TipoExamen"
+        }
       },
       "EstadoExamen": {
         "type": "string",
@@ -130,7 +518,10 @@
           "PENDIENTE",
           "CANCELADO",
           "COMPLETADO"
-        ]
+        ],
+        "xml": {
+          "name": "EstadoExamen"
+        }
       },
       "loginDTO": {
         "type": "object",
@@ -143,6 +534,9 @@
             "type": "string",
             "example": "123456789"
           }
+        },
+        "xml": {
+          "name": "loginDTO"
         }
       },
       "registerDTO": {
@@ -164,6 +558,9 @@
             "type": "string",
             "example": "VETERNIARIO"
           }
+        },
+        "xml": {
+          "name": "registerDTO"
         }
       }
     }
