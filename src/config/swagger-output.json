@@ -1,0 +1,171 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API - Veterinaria",
+    "description": "Documentacion del sistema de Veterinaria",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/"
+    }
+  ],
+  "paths": {
+    "/usuarios/": {
+      "get": {
+        "tags": [
+          "Usuarios"
+        ],
+        "summary": "ver a todos los usuarios",
+        "description": "Permite visualizar el listado de todos los usuarios",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "description": "",
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nombre": {
+                    "example": "any"
+                  },
+                  "email": {
+                    "example": "any"
+                  },
+                  "password": {
+                    "example": "any"
+                  },
+                  "rol": {
+                    "example": "any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Rol": {
+        "example": "RECEPCIONISTA",
+        "type": "string",
+        "enum": [
+          "RECEPCIONISTA",
+          "VETERINARIO",
+          "LABORATORISTA"
+        ]
+      },
+      "Especie": {
+        "type": "string",
+        "enum": [
+          "PERRO",
+          "GATO"
+        ]
+      },
+      "EstadoAtencion": {
+        "type": "string",
+        "enum": [
+          "EN_CONSULTA",
+          "EN_ESPERA_EXAMENES",
+          "DADA_DE_ALTA"
+        ]
+      },
+      "TipoExamen": {
+        "type": "string",
+        "enum": [
+          "HEMOGRAMA",
+          "RAYOS_X",
+          "ECOGRAFICA"
+        ]
+      },
+      "EstadoExamen": {
+        "type": "string",
+        "enum": [
+          "PENDIENTE",
+          "CANCELADO",
+          "COMPLETADO"
+        ]
+      },
+      "loginDTO": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "example": "veterinario@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789"
+          }
+        }
+      },
+      "registerDTO": {
+        "type": "object",
+        "properties": {
+          "nombre": {
+            "type": "string",
+            "example": "juan perez"
+          },
+          "email": {
+            "type": "string",
+            "example": "veterinario@gmail.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "123456789"
+          },
+          "rol": {
+            "type": "string",
+            "example": "VETERNIARIO"
+          }
+        }
+      }
+    }
+  }
+}
