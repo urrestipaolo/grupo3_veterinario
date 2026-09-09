@@ -19,6 +19,7 @@ router.post(
 
 router.get(
   "/:id",
+  authorize("RECEPCIONISTA", "VETERINARIO"),
   /* 
     #swagger.tags = ['Dueños']
     #swagger.description = 'Devuelve un dueño con sus mascotas'
