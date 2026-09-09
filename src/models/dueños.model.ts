@@ -12,4 +12,3 @@ export function obtenerDueñoPorId(id: number) {
     include: { mascotas: true },
   });
 }
- 

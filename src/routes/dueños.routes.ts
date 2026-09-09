@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { verifyToken } from "../middlewares/auth.middleware";
 import { authorize } from "../middlewares/authorize.middleware";
-import { crearDueñoController, obtenerDueñoController } from "../controllers/dueños.controllers";
+import { crearDueñoController, obtenerDueñoController } from "../controllers/dueños.controller";
 
 const router = Router();
 
