@@ -5,7 +5,7 @@ import { prisma } from "../config/prisma.js";
 
 export async function register(req: Request, res: Response) {
   /* 
-    #swagger.tags = ["Auth"]
+    #swagger.tags = ["Login"]
     #swagger.summary = "Registrar un usuario nuevo"
     #swagger.description= "registra a un usuario nuevo en el sistema"
     #swagger.requestBody ={
@@ -32,7 +32,7 @@ export async function register(req: Request, res: Response) {
 
 export async function login(req: Request, res: Response) {
   /* 
-    #swagger.tags = ["Auth"]
+    #swagger.tags = ["Login"]
     #swagger.summary = "Inicio de Sesion"
     #swagger.description= "Autentica a un usuario y retorna su JWT"
     #swagger.requestBody ={
