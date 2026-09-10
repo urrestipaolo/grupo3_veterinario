@@ -24,18 +24,41 @@
     "/auth/register": {
       "post": {
         "tags": [
-          "Auth"
+          "Login"
         ],
         "summary": "Registrar un usuario nuevo",
         "description": "registra a un usuario nuevo en el sistema",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
           }
         },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -56,7 +79,7 @@
     "/auth/login": {
       "post": {
         "tags": [
-          "Auth"
+          "Login"
         ],
         "summary": "Inicio de Sesion",
         "description": "Autentica a un usuario y retorna su JWT",
@@ -193,30 +216,45 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "nombre": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Pupin"
                   },
                   "especie": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "PERRO"
                   },
                   "raza": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Pastor Aleman"
                   },
                   "peso": {
-                    "example": "any"
+                    "type": "number",
+                    "example": 10
                   },
                   "edadAproximada": {
-                    "example": "any"
+                    "type": "number",
+                    "example": 5
                   },
                   "dueñoId": {
-                    "example": "any"
+                    "type": "number",
+                    "example": "1"
                   }
-                }
+                },
+                "required": [
+                  "nombre",
+                  "especie",
+                  "raza",
+                  "peso",
+                  "edadAproximada",
+                  "dueñoId"
+                ]
               }
             }
           }
@@ -430,7 +468,7 @@
         }
       }
     },
-    "/dueños/": {
+    "/duenos/": {
       "post": {
         "tags": [
           "Dueños"
@@ -458,6 +496,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -466,31 +507,40 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "nombre": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Maria Gomez"
                   },
                   "telefono": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "3411234567"
                   },
                   "email": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "maria@gmail.com"
                   },
                   "direccion": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Av Siempreviva 742"
                   }
-                }
+                },
+                "required": [
+                  "nombre",
+                  "telefono"
+                ]
               }
             }
           }
         }
       }
     },
-    "/dueños/{id}": {
+    "/duenos/{id}": {
       "get": {
         "tags": [
           "Dueños"
@@ -529,6 +579,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [

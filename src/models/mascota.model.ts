@@ -3,9 +3,9 @@ import { Especie, Role } from "../../generated/prisma/enums";
 
 export interface RegistrarMascota {
   nombre: string;
-  especie: Especie;
+  especie: "PERRO" | "GATO";
   raza: string;
-  peso: string;
+  peso: number;
   edadAproximada: number;
   dueñoId: number;
 }
@@ -17,6 +17,14 @@ export const MascotaModel = {
   crear: async (data: RegistrarMascota) => {
     return await prisma.mascota.create({
       data,
+      select: {
+        nombre: true,
+        especie: true,
+        raza: true,
+        peso: true,
+        edadAproximada: true,
+        dueñoId: true,
+      }
     });
   },
 };

@@ -23,7 +23,7 @@ app.use("/auth", authRouter);
 app.use("/usuarios", UsuarioRouter);
 app.use("/mascotas", MascotaRouter);
 app.use("/api/atenciones-medicas", atencionMedicaRouter);
-app.use("/dueños", DueñosRouter);
+app.use("/duenos", DueñosRouter);
 
 app.listen(3000, () => {
   console.log(`servidor corriendo en http://localhost:3000`);

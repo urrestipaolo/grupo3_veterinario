@@ -10,8 +10,8 @@ const router = Router();
 router.get("/", verifyToken, authorize ("RECEPCIONISTA", "VETERINARIO"), getMascota);
 router.post("/", 
     verifyToken, 
-    validateMascota(crearMascotaSchema, "body"), 
     authorize ("RECEPCIONISTA", "VETERINARIO"),
+    validateMascota(crearMascotaSchema),
     postMascota);
 
 export default router;
