@@ -2,12 +2,11 @@ import express from "express";
 import cors from "cors";
 import atencionMedicaRouter from "./routes/atencion-medica.routes.js";
 import UsuarioRouter from "./routes/usuario.route";
-import MascotaRouter from "./routes/mascota.routes"
+import MascotaRouter from "./routes/mascota.routes";
 import DueñosRouter from "./routes/dueños.routes";
 import authRouter from "./routes/auth.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger-output.json" with { type: "json" };
-
 
 const app = express();
 app.use(express.json());
