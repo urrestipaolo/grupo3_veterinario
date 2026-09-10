@@ -430,7 +430,7 @@
         }
       }
     },
-    "/dueños/": {
+    "/duenos/": {
       "post": {
         "tags": [
           "Dueños"
@@ -490,7 +490,7 @@
         }
       }
     },
-    "/dueños/{id}": {
+    "/duenos/{id}": {
       "get": {
         "tags": [
           "Dueños"
