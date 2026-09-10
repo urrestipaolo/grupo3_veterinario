@@ -7,7 +7,6 @@ import DueñosRouter from "./routes/dueños.routes";
 import authRouter from "./routes/auth.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger-output.json" with { type: "json" };
-import DueñosRouter from "./routes/dueños.routes";
 
 const app = express();
 app.use(express.json());

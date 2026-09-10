@@ -43,6 +43,6 @@ export const postMascota = async (req: Request, res: Response) => {
       .status(201)
       .json({ message: "La Mascota ha sido creada con exito", data: mascotax });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return res.status(500).json({ message: "error en el servidor" });
   }
 };
