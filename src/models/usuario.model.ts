@@ -32,7 +32,11 @@ export const UsuarioModel = {
     return await prisma.usuario.update({
       where: { id },
       data,
-      omit: { contraseña: true, id: true },
+      select: {
+        nombre: true,
+        email: true,
+        rol: true,
+      },
     });
   },
   delete: async (id: number) => {
