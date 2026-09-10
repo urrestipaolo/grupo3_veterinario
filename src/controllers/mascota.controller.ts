@@ -25,6 +25,25 @@ export const postMascota = async (req: Request, res: Response) => {
     #swagger.tags = ["MASCOTAS"]
     #swagger.summary = "Poder crear una mascota"
     #swagger.description= "Cree una mascota según el ejemplo"
+        #swagger.requestBody = {
+      required: true,
+      content: {
+        "application/json": {
+          schema: {
+            type: "object",
+            properties: {
+              nombre: { type: "string", example: "Pupin" },
+              especie: { type: "string", example: "PERRO" },
+              raza: { type: "string", example: "Pastor Aleman" },
+              peso: { type: "number", example: 10 },
+              edadAproximada: { type: "number", example: 5 },
+              dueñoId: { type: "number", example: "1" },
+            },
+            required: ["nombre", "especie", "raza", "peso", "edadAproximada", "dueñoId"]
+          }
+        }
+      }
+    }
   */
   try {
     const { nombre, especie, raza, peso, edadAproximada, dueñoId} = req.body;
@@ -43,6 +62,7 @@ export const postMascota = async (req: Request, res: Response) => {
       .status(201)
       .json({ message: "La Mascota ha sido creada con exito", data: mascotax });
   } catch (error) {
-    return res.status(500).json({ message: error });
+    console.error("DETALLE DEL ERROR: ", error)
+    return res.status(500).json({ message: "error en el servidor" });
   }
 };

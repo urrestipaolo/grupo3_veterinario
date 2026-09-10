@@ -337,30 +337,45 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "nombre": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Pupin"
                   },
                   "especie": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "PERRO"
                   },
                   "raza": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Pastor Aleman"
                   },
                   "peso": {
-                    "example": "any"
+                    "type": "number",
+                    "example": 10
                   },
                   "edadAproximada": {
-                    "example": "any"
+                    "type": "number",
+                    "example": 5
                   },
                   "dueñoId": {
-                    "example": "any"
+                    "type": "number",
+                    "example": "1"
                   }
-                }
+                },
+                "required": [
+                  "nombre",
+                  "especie",
+                  "raza",
+                  "peso",
+                  "edadAproximada",
+                  "dueñoId"
+                ]
               }
             }
           }
