@@ -458,6 +458,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
@@ -466,24 +469,33 @@
           }
         ],
         "requestBody": {
+          "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
                   "nombre": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Maria Gomez"
                   },
                   "telefono": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "3411234567"
                   },
                   "email": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "maria@gmail.com"
                   },
                   "direccion": {
-                    "example": "any"
+                    "type": "string",
+                    "example": "Av Siempreviva 742"
                   }
-                }
+                },
+                "required": [
+                  "nombre",
+                  "telefono"
+                ]
               }
             }
           }
@@ -529,6 +541,9 @@
           },
           "404": {
             "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         },
         "security": [
