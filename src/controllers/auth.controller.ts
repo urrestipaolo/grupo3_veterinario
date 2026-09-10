@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import { prisma } from "../config/prisma.js";
 
 export async function register(req: Request, res: Response) {
-  /* 
+  /*#swagger.security = [{ "bearerAuth": [] }]
     #swagger.tags = ["Login"]
     #swagger.summary = "Registrar un usuario nuevo"
     #swagger.description= "registra a un usuario nuevo en el sistema"
