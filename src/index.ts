@@ -7,6 +7,7 @@ import DueñosRouter from "./routes/dueños.routes";
 import authRouter from "./routes/auth.routes";
 import swaggerUi from "swagger-ui-express";
 import swaggerDocument from "./config/swagger-output.json" with { type: "json" };
+import examenLaboratorioRouter from "./routes/examen-laboratorio.routes.js";
 
 const app = express();
 app.use(express.json());
@@ -24,6 +25,7 @@ app.use("/usuarios", UsuarioRouter);
 app.use("/mascotas", MascotaRouter);
 app.use("/api/atenciones-medicas", atencionMedicaRouter);
 app.use("/duenos", DueñosRouter);
+app.use("/api/examenes-laboratorio", examenLaboratorioRouter) //acá conectamos las rutas de exámenes
 
 app.listen(3000, () => {
   console.log(`servidor corriendo en http://localhost:3000`);
